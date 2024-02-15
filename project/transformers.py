@@ -12,12 +12,12 @@ def calc_month_facts(df: DataFrame) -> DataFrame:
     """
     Group by month and return summary stats
     """
-    return df.with_column('month', monthname('STARTTIME'))\
-        .group_by('month')\
+    return (df.with_column('month', monthname('STARTTIME'))
+        .group_by('month')
         .agg(
             count('*').alias('COUNT'), 
             avg('TRIPDURATION').alias('AVG_TRIPDURATION'), 
-            avg('RIDER_AGE').alias('AVG_RIDER_AGE'))
+            avg('RIDER_AGE').alias('AVG_RIDER_AGE')))
 
 
 def calc_bike_facts(df: DataFrame) -> DataFrame:
